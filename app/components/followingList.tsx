@@ -5,11 +5,14 @@ import { Button } from '@/components/ui/button'
 import { MessageCircle, SendIcon, ShieldAlertIcon, ShieldCheckIcon, User2, Verified } from 'lucide-react'
 import Link from 'next/link'
 import { BsGithub, BsTwitterX } from 'react-icons/bs'
+import { AvatarGenerator } from 'random-avatar-generator'
+
+const generator = new AvatarGenerator()
 export default function FollowingList() {
   const data = [
     {
       name: 'John Doe',
-      image: 'https://github.com/shadcn.png',
+      image: generator.generateRandomAvatar(),
       wallet: '0x1234...5678',
       verified: true,
       x: '@Hoang_son_pham',
@@ -18,7 +21,7 @@ export default function FollowingList() {
     },
     {
       name: 'Jame Bone',
-      image: 'https://github.com/shadcn.png',
+      image: generator.generateRandomAvatar(),
       wallet: '0x1234...5678',
       verified: true,
       x: '@Hoang_son_pham',
@@ -27,7 +30,7 @@ export default function FollowingList() {
     },
     {
       name: 'John Doe',
-      image: 'https://github.com/shadcn.png',
+      image: generator.generateRandomAvatar(),
       wallet: '0x1234...5678',
       verified: true,
       x: '@Hoang_son_pham',
@@ -36,7 +39,7 @@ export default function FollowingList() {
     },
     {
       name: 'Jame Bone',
-      image: 'https://github.com/shadcn.png',
+      image: generator.generateRandomAvatar(),
       wallet: '0x1234...5678',
       verified: true,
       x: '@Hoang_son_pham',
@@ -45,7 +48,7 @@ export default function FollowingList() {
     },
     {
       name: 'John Doe',
-      image: 'https://github.com/shadcn.png',
+      image: generator.generateRandomAvatar(),
       wallet: '0x1234...5678',
       verified: true,
       x: '@Hoang_son_pham',
@@ -54,7 +57,7 @@ export default function FollowingList() {
     },
     {
       name: 'Jame Bone',
-      image: 'https://github.com/shadcn.png',
+      image: generator.generateRandomAvatar(),
       wallet: '0x1234...5678',
       verified: true,
       x: '@Hoang_son_pham',
@@ -63,7 +66,7 @@ export default function FollowingList() {
     },
     {
       name: 'John Doe',
-      image: 'https://github.com/shadcn.png',
+      image: generator.generateRandomAvatar(),
       wallet: '0x1234...5678',
       verified: true,
       x: '@Hoang_son_pham',
@@ -72,7 +75,7 @@ export default function FollowingList() {
     },
     {
       name: 'Jame Bone',
-      image: 'https://github.com/shadcn.png',
+      image: generator.generateRandomAvatar(),
       wallet: '0x1234...5678',
       verified: true,
       x: '@Hoang_son_pham',

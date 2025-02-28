@@ -4,13 +4,16 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Edit, Verified } from 'lucide-react'
 import { BsThreeDots } from 'react-icons/bs'
 import FollowingList from './components/followingList'
+import { AvatarGenerator } from 'random-avatar-generator'
+import Link from 'next/link'
 
+const generator = new AvatarGenerator()
 export default function Home() {
   return (
     <div>
       <div className='flex gap-5'>
         <Avatar className='w-20 h-20'>
-          <AvatarImage src='https://github.com/shadcn.png' />
+          <AvatarImage src={generator.generateRandomAvatar('imhson')} />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
         <div className='space-y-2'>
@@ -24,9 +27,11 @@ export default function Home() {
             <Button size='sm' variant='secondary'>
               <BsThreeDots /> Detail
             </Button>
-            <Button size='sm'>
-              <Edit /> Edit Profile
-            </Button>
+            <Link href='/my-passport'>
+              <Button size='sm'>
+                <Edit /> Edit Profile
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

@@ -10,6 +10,9 @@ import Discord from './components/discord'
 import Github from './components/github'
 import X from './components/x'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { AvatarGenerator } from 'random-avatar-generator'
+
+const generator = new AvatarGenerator()
 const CHAIN_ID = 'mocha-4'
 export default function MyPassport() {
   const [account, setAccount] = useState<any>()
@@ -145,7 +148,7 @@ export default function MyPassport() {
       </div>
       <div className='flex flex-col items-center justify-start gap-5'>
         <Avatar className='w-48 h-48'>
-          <AvatarImage src='https://github.com/shadcn.png' />
+          <AvatarImage src={generator.generateRandomAvatar('imhson')} />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
         <div className='font-medium flex gap-2 text-blue-400 border border-dashed rounded-full px-3 py-1.5 border-blue-400 items-center text-sm'>
