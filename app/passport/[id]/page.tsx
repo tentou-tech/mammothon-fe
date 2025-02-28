@@ -4,17 +4,16 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { MessageCircle, SendIcon, VerifiedIcon, Wallet } from 'lucide-react'
 import Link from 'next/link'
-import { useParams } from 'next/navigation'
 import Script from 'next/script'
 import GitHubCalendar from 'react-github-calendar'
 import { BsGithub, BsTwitterX } from 'react-icons/bs'
 import { IoIosArrowBack } from 'react-icons/io'
-import { useIsClient } from 'usehooks-ts'
 import { LuUserRoundCheck } from 'react-icons/lu'
+import { useIsClient } from 'usehooks-ts'
 export default function Passport() {
-  const params = useParams()
+  // const params = useParams()
   const isClient = useIsClient()
-  const id = params.id
+  // const id = params.id
   return (
     <>
       <Link href='/' className='absolute top-10 left-10'>

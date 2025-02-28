@@ -130,7 +130,7 @@ export default function MyPassport() {
           <div className='text-zinc-400'>Github</div>
           <Github unsavedChanges={unsavedChanges} setUnsavedChanges={setUnsavedChanges} />
           <div className='text-zinc-400'>Discord</div>
-          <Discord unsavedChanges={unsavedChanges} setUnsavedChanges={setUnsavedChanges} />
+          <Discord />
         </div>
         <div className='flex items-center gap-4'>
           <Button

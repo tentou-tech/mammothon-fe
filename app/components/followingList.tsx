@@ -1,7 +1,8 @@
 'use client'
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { CopyIcon, ShieldAlert, Verified, Wallet } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { MessageCircle, SendIcon, ShieldAlertIcon, ShieldCheckIcon, User2, Verified } from 'lucide-react'
 import Link from 'next/link'
 import { BsGithub, BsTwitterX } from 'react-icons/bs'
 export default function FollowingList() {
@@ -80,49 +81,60 @@ export default function FollowingList() {
     },
   ]
   return (
-    <div className='divide-y mt-10 w-full'>
-      <div className='grid grid-cols-3 gap-5'>
+    <div className='divide-y w-full'>
+      <div className='divide-y'>
         {data.map((item, index) => (
-          <Link
-            href={`/passport/${item.id}`}
-            key={index}
-            className='flex items-start p-5 gap-5 w-full min-w-0 bg-white/5 rounded-2xl'>
-            <Avatar className='w-32 h-32'>
+          <Link href={`/passport/${item.id}`} key={index} className='flex items-start py-5 gap-5'>
+            <Avatar className='w-14 h-14'>
               <AvatarImage src={item.image} />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
-            <div className='w-full justify-between items-start flex'>
+            <div className='flex items-center justify-between w-full'>
               <div className='flex w-full min-w-0 divide-x'>
-                <div className=' space-y-2 text-muted-foreground'>
+                <div className=' space-y-1 text-muted-foreground pr-10'>
                   <p className='font-semibold text-white text-xl flex items-center gap-3'>
                     {item.name} <Verified className='text-blue-400 w-5 h-5' />
                   </p>
-                  <div className='text-sm flex items-center gap-2'>
-                    <ShieldAlert className='text-orange-400 h-4 w-4' />
-                    Last update: 10 minutes ago
+                  <div className='text-sm flex items-center gap-1'>
+                    <ShieldCheckIcon className='text-green-400 h-4 w-4' />
+                    Account created: 10 months ago
                   </div>
-                  <p className='text-sm flex items-center gap-2'>
-                    <Wallet className='h-4 w-4' />
-                    {item.wallet}{' '}
-                    <span>
-                      <CopyIcon
-                        className='w-4 h-4 cursor-copy'
-                        onClick={(event) => {
-                          navigator.clipboard.writeText(item.wallet)
-                          event.preventDefault()
-                        }}
-                      />
-                    </span>
-                  </p>
-                  <p className='text-sm flex items-center gap-2'>
-                    <BsTwitterX />
-                    {item.x}
-                  </p>
-                  <p className='text-sm text-muted-foreground flex items-center gap-2'>
-                    <BsGithub />
-                    {item.github}
-                  </p>
                 </div>
+                <div className=' space-y-1 text-muted-foreground px-10'>
+                  <p className='font-semibold text-white flex items-center gap-1'>
+                    <BsTwitterX /> {item.x}
+                  </p>
+                  <div className='text-sm flex items-center gap-1'>
+                    <ShieldCheckIcon className='text-green-400 h-4 w-4' />
+                    Last updated: 9 months ago
+                  </div>
+                </div>
+                <div className=' space-y-1 text-muted-foreground px-10'>
+                  <p className='font-semibold text-white flex items-center gap-1'>
+                    <BsGithub /> {item.github}
+                  </p>
+                  <div className='text-sm flex items-center gap-1'>
+                    <ShieldAlertIcon className='text-orange-400 h-4 w-4' />
+                    Last updated: 12 minutes ago
+                  </div>
+                </div>
+                <div className='px-10 text-xs'>
+                  <div>View: 182,355</div>
+                  <div>Follower: 28,755</div>
+                  <div>Following: 2,354</div>
+                </div>
+              </div>
+              <div className='flex items-center gap-2'>
+                <Button variant='secondary' className='w-24'>
+                  <User2 />
+                  Follow
+                </Button>
+                <Button variant='secondary' className='w-24'>
+                  <SendIcon /> Transfer
+                </Button>
+                <Button className='w-24'>
+                  <MessageCircle /> Chat
+                </Button>
               </div>
             </div>
           </Link>
