@@ -97,7 +97,7 @@ export default function ContextProvider({ children }: any) {
     try {
       if (!key?.bech32Address) return
       const myAccount = await getAccountByWalletAddress(key.bech32Address)
-      setAccount(myAccount)
+      setAccount(myAccount.id ? myAccount : null)
     } catch (error: any) {
       console.error(error)
     }

@@ -14,6 +14,7 @@ import { IoIosArrowBack } from 'react-icons/io'
 import Discord from './components/discord'
 import Github from './components/github'
 import X from './components/x'
+import { BsGithub, BsTwitterX } from 'react-icons/bs'
 
 const generator = new AvatarGenerator()
 export default function MyPassport() {
@@ -23,7 +24,18 @@ export default function MyPassport() {
   const [nameChanged, setNameChanged] = useState(false)
   const [unsavedChanges, setUnsavedChanges] = useState([])
   const [loading, setLoading] = useState(false)
-
+  let datas = []
+  let xUsername = null
+  let githubUsername = null
+  let info = null
+  if (account) {
+    datas = account.data.map((d: string) => JSON.parse(d))
+    const xData = datas.findLast((d: any) => d.provider == 'x')
+    const githubData = datas.findLast((d: any) => d.provider == 'github')
+    info = datas.findLast((d: any) => d.provider == 'main-info')
+    xUsername = xData ? JSON.parse(xData.proofs.claimData.context).extractedParameters.screen_name : null
+    githubUsername = githubData ? JSON.parse(githubData.proofs.claimData.context).extractedParameters.username : null
+  }
   const saveHandler = async () => {
     try {
       if (loading) return
@@ -62,10 +74,14 @@ export default function MyPassport() {
     }
   }
   useEffect(() => {
-    if (address) {
-      setName(shorten(address))
+    if (info) {
+      setName(info.name)
+    } else {
+      if (address) {
+        setName(shorten(address))
+      }
     }
-  }, [address])
+  }, [address, info])
   if (!address) {
     return (
       <div className='space-y-5'>
@@ -142,17 +158,30 @@ export default function MyPassport() {
         </div>
         <div className='flex flex-col items-center justify-start 2xl:w-1/2 gap-5'>
           <Avatar className='w-48 h-48'>
-            <AvatarImage src={generator.generateRandomAvatar('imhson')} />
+            <AvatarImage src={generator.generateRandomAvatar(address)} />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
-          <div className='font-medium flex gap-2 text-blue-400 border border-dashed rounded-full px-3 py-1.5 border-blue-400 items-center text-sm'>
-            <VerifiedIcon />
-            Verified
-          </div>
+          {info?.name && (
+            <div className='flex items-center gap-3'>
+              <div className='text-2xl font-semibold'>{info.name}</div>
+              <VerifiedIcon className='text-blue-400' />
+            </div>
+          )}
           <div className='text-lg font-semibold flex gap-4 items-center'>
             <Wallet />
             {address}
           </div>
+          {xUsername && (
+            <div className='text-lg font-semibold flex gap-4 items-center'>
+              <BsTwitterX />@{xUsername}
+            </div>
+          )}
+          {githubUsername && (
+            <div className='text-lg font-semibold flex gap-4 items-center'>
+              <BsGithub />
+              {githubUsername}
+            </div>
+          )}
         </div>
       </div>
     </div>

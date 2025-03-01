@@ -88,7 +88,12 @@ export default function X({
         {unsavedX ? (
           <div>@{JSON.parse(unsavedX.proofs.claimData.context).extractedParameters.screen_name}</div>
         ) : xUsername ? (
-          <div>@{xUsername}</div>
+          <div className='flex items-center gap-3'>
+            <div>@{xUsername}</div>
+            <Button size='lg' variant='outline' onClick={getVerificationRequest}>
+              <BsTwitterX /> Re-link X
+            </Button>
+          </div>
         ) : (
           <Button size='lg' variant='outline' className='w-full' onClick={getVerificationRequest}>
             <BsTwitterX /> Link X

@@ -88,7 +88,12 @@ export default function Github({
         {unsavedGithub ? (
           <div>@{JSON.parse(unsavedGithub.proofs.claimData.context).extractedParameters.username}</div>
         ) : githubUsername ? (
-          <div>{githubUsername}</div>
+          <div className='flex items-center gap-3'>
+            <div>{githubUsername}</div>
+            <Button size='lg' className=' bg-[#2dba4e] hover:bg-[#24292e] text-white' onClick={getVerificationRequest}>
+              <FaGithub /> Re-link Github
+            </Button>
+          </div>
         ) : (
           <Button
             size='lg'

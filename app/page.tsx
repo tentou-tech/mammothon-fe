@@ -14,27 +14,29 @@ import { shorten } from '@/lib/utils'
 const generator = new AvatarGenerator()
 export default function Home() {
   const { key, account, connectKeplr } = useContext(Context)
-  const datas = account.data.map((d: string) => JSON.parse(d))
-  const info = datas.findLast((d: any) => d.provider == 'main-info')
+  const datas = account?.data?.map((d: string) => JSON.parse(d))
+  const info = datas?.findLast((d: any) => d.provider == 'main-info')
   return (
     <div>
       {account ? (
         <div className='flex gap-5'>
           <Avatar className='w-20 h-20'>
-            <AvatarImage src={generator.generateRandomAvatar('imhson')} />
+            <AvatarImage src={generator.generateRandomAvatar(account.id)} />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
           <div className='space-y-2'>
             <div className='font-semibold text-xl flex items-center gap-2'>
-              {info.name || shorten(account.id)}
+              {info?.name || shorten(account?.id)}
               <div className='flex text-xs text-blue-400 rounded-full border border-dashed px-2 border-blue-400 w-fit py-1 items-center gap-1'>
                 <Verified className='w-4 h-4' /> Verified
               </div>
             </div>
             <div className='flex items-center gap-2'>
-              <Button size='sm' variant='secondary'>
-                <BsThreeDots /> Detail
-              </Button>
+              <Link href={`/passport/${account?.id}`}>
+                <Button size='sm' variant='secondary'>
+                  <BsThreeDots /> Detail
+                </Button>
+              </Link>
               <Link href='/my-passport'>
                 <Button size='sm'>
                   <Edit /> Edit Profile
