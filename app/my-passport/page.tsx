@@ -18,7 +18,7 @@ import { BsGithub, BsTwitterX } from 'react-icons/bs'
 
 const generator = new AvatarGenerator()
 export default function MyPassport() {
-  const { key, keplr, setKeplr, setKey, connectKeplr, getAccount, account } = useContext(Context)
+  const { key, keplr, setKeplr, setKey, connectKeplr, getAccount, account, setAccount } = useContext(Context)
   const address = key?.bech32Address
   const [name, setName] = useState('')
   const [nameChanged, setNameChanged] = useState(false)
@@ -47,7 +47,7 @@ export default function MyPassport() {
         const cosmosKey = await keplr.getKey('cosmoshub-4')
         const signature = await keplr.signArbitrary('cosmoshub-4', cosmosKey.bech32Address, bytes.payload)
         await sendAccountCreation(address, verifying_key, signature.signature)
-        await delay(5000)
+        await delay(15000)
       }
       if (nameChanged) {
         await addData(
@@ -63,6 +63,8 @@ export default function MyPassport() {
       }
       await Promise.all(
         unsavedChanges.map(async (change: any) => {
+          const cosmosKey = await keplr.getKey('cosmoshub-4')
+          await keplr.signArbitrary('cosmoshub-4', cosmosKey.bech32Address, JSON.stringify(change))
           await addData(address, JSON.stringify(change), '')
         })
       )
@@ -105,7 +107,7 @@ export default function MyPassport() {
         </h1>
       </Link>
       <div className='flex flex-col-reverse 2xl:flex-row justify-between gap-10'>
-        <div className='space-y-10 text-xl 2xl:w-1/2 2xl:max-w-xl'>
+        <div className='space-y-10 text-xl 2xl:w-2/3 2xl:max-w-xl'>
           <div className='grid grid-cols-[200px_1fr] gap-x-5 gap-y-10 items-center'>
             <div className='text-zinc-400'>Display Name</div>
             <div>
@@ -130,6 +132,7 @@ export default function MyPassport() {
                     setKeplr(null)
                     setUnsavedChanges([])
                     setNameChanged(false)
+                    setAccount(null)
                   }}>
                   <Unlink /> Disconnect
                 </Button>
@@ -159,7 +162,7 @@ export default function MyPassport() {
             )}
           </div>
         </div>
-        <div className='flex flex-col items-center justify-start 2xl:w-1/2 gap-5'>
+        <div className='flex flex-col items-center justify-start 2xl:w-1/3 gap-5'>
           <Avatar className='w-48 h-48'>
             <AvatarImage src={generator.generateRandomAvatar(address)} />
             <AvatarFallback>CN</AvatarFallback>

@@ -40,17 +40,17 @@ export default function FollowingList() {
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
               <div className='flex items-center justify-between w-full'>
-                <div className='flex w-full min-w-0 divide-x'>
+                <div className='w-full min-w-0 grid grid-cols-4 divide-x'>
                   <Link href={`/passport/${account.id}`} className=' space-y-1 text-muted-foreground pr-10'>
                     <p className='font-semibold text-white text-xl flex items-center gap-3'>
-                      {info.name || shorten(account.id)} <Verified className='text-blue-400 w-5 h-5' />
+                      {info?.name || shorten(account.id)} <Verified className='text-blue-400 w-5 h-5' />
                     </p>
                     <div className='text-sm flex items-center gap-1'>
                       <ShieldCheckIcon className='text-green-400 h-4 w-4 shrink-0' />
                       {`Account created: ${Math.floor(Math.random() * (12 - 4 + 1)) + 4} months ago`}
                     </div>
                   </Link>
-                  {xUsername && (
+                  {xUsername ? (
                     <div className=' space-y-1 text-muted-foreground px-10'>
                       <Link
                         href={`https://twitter.com/${xUsername}`}
@@ -67,14 +67,16 @@ export default function FollowingList() {
                         {`Last updated: ${moment(xData.updatedAt).fromNow()}`}
                       </div>
                     </div>
+                  ) : (
+                    <div></div>
                   )}
-                  {githubUsername && (
+                  {githubUsername ? (
                     <div className=' space-y-1 text-muted-foreground px-10'>
                       <p className='font-semibold text-white flex items-center gap-1'>
                         <BsGithub /> {githubUsername}
                       </p>
                       <div className='text-sm flex items-center gap-1'>
-                        {moment(xData.updatedAt).isAfter(moment().subtract(7, 'days')) ? (
+                        {moment(githubData.updatedAt).isAfter(moment().subtract(7, 'days')) ? (
                           <ShieldAlertIcon className='text-orange-400 h-4 w-4 shrink-0' />
                         ) : (
                           <ShieldCheckIcon className='text-green-400 h-4 w-4 shrink-0' />
@@ -82,6 +84,8 @@ export default function FollowingList() {
                         {`Last updated: ${moment(githubData.updatedAt).fromNow()}`}
                       </div>
                     </div>
+                  ) : (
+                    <div></div>
                   )}
                   <div className='px-10 text-xs'>
                     <div>{`View: ${(
