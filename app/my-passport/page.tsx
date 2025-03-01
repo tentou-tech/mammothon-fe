@@ -4,7 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Context } from '@/context'
-import { shorten } from '@/lib/utils'
+import { delay, shorten } from '@/lib/utils'
 import { addData, requestAccountCreation, sendAccountCreation } from '@/services'
 import { Loader2, SaveIcon, Unlink, VerifiedIcon, Wallet } from 'lucide-react'
 import Link from 'next/link'
@@ -47,6 +47,7 @@ export default function MyPassport() {
         const cosmosKey = await keplr.getKey('cosmoshub-4')
         const signature = await keplr.signArbitrary('cosmoshub-4', cosmosKey.bech32Address, bytes.payload)
         await sendAccountCreation(address, verifying_key, signature.signature)
+        await delay(5000)
       }
       if (nameChanged) {
         await addData(
@@ -127,6 +128,8 @@ export default function MyPassport() {
                   onClick={() => {
                     setKey(null)
                     setKeplr(null)
+                    setUnsavedChanges([])
+                    setNameChanged(false)
                   }}>
                   <Unlink /> Disconnect
                 </Button>

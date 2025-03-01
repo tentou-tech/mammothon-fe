@@ -15,3 +15,6 @@ export const shorten = (string: string, preCh?: number, sufCh?: number) => {
   const suf = string.slice(-(sufCh || 5))
   return `${pre}...${suf}`
 }
+export function delay(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms))
+}
