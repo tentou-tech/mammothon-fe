@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Prims Mammothon
 
-## Getting Started
+## Overview
+The **Prims Mammothon** is a decentralized identity verification platform that allows users to authenticate and verify their identity by connecting their **crypto wallet, X (formerly Twitter) account, and GitHub**. The application explores additional publicly available data to ensure the legitimacy of a user's information, providing a trust layer for online interactions.
 
-First, run the development server:
+## Features
+- **Multi-Source Identity Verification**: Users can connect their **crypto wallet, X account, and GitHub** to verify their identity.
+- **Trust Score System**: Aggregates and evaluates connected accounts to ensure legitimacy.
+- **Decentralized Authentication**: Uses **Keplr wallet authentication** to verify ownership on Cosmos chains.
+- **Cross-Platform Insights**: Gathers relevant public data from connected accounts to enhance transparency.
+- **Privacy-Focused**: Users have control over what information is shared and displayed.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## How It Works
+1. **Connect Wallet**: Users authenticate using their **Keplr wallet on Cosmos chains**.
+2. **Link Social Accounts**: Users connect their **X account and GitHub**.
+3. **Verification Analysis**: The system aggregates data from connected accounts to validate authenticity.
+4. **Trust Level Calculation**: A trust score is generated based on verification results.
+5. **User Profile Display**: Verified users can share their trust score or verified status with third parties.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Supported Wallets
+- Keplr (for Cosmos chains)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Technologies Used
+- **Frontend**: Next.js (React), Tailwind CSS
+- **Backend**: Node.js, Express, PostgreSQL
+- **Blockchain Integration**: CosmJS
+- **API Integrations**: X API, GitHub API
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Installation
+1. Clone the repository:
+   ```sh
+   git clone git@github.com:tentou-tech/mammothon-fe.git
+   cd prims-mammothon
+   ```
+2. Install dependencies:
+   ```sh
+   npm install
+   ```
+3. Run the development server:
+   ```sh
+   npm run dev
+   ```
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Learn More
+## Security & Privacy
+- Data is retrieved via **public APIs** and is not stored permanently.
+- Users retain control over **linked accounts and visibility settings**.
+- No private keys or sensitive user data are collected.
 
-To learn more about Next.js, take a look at the following resources:
+## Roadmap
+- [ ] Add **ENS & Lens Protocol** integration
+- [ ] Implement **Decentralized Identity (DID)** verification
+- [ ] Expand **trust score criteria**
+- [ ] Develop **browser extension** for identity validation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contributing
+We welcome contributions! Feel free to submit issues, feature requests, or pull requests.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## License
+This project is licensed under the **MIT License**.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
