@@ -13,10 +13,12 @@ COPY . .
 
 # ENV NEXT_TELEMETRY_DISABLED 1
 
-RUN yarn build
+RUN next build
+
+COPY . .
 
 EXPOSE 3000
 
 ENV PORT 3000
 
-CMD ["next", "start"]
+CMD ["node", "server.js"]
