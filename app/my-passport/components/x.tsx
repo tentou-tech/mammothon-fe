@@ -1,10 +1,11 @@
 'use client'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
+import { Context } from '@/context'
 import { ReclaimProofRequest } from '@reclaimprotocol/js-sdk'
 import { SaveOff } from 'lucide-react'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { BsTwitterX } from 'react-icons/bs'
 import QRCode from 'react-qr-code'
 
@@ -15,9 +16,17 @@ export default function X({
   setUnsavedChanges: (unsavedChanges: any) => void
   unsavedChanges: any[]
 }) {
+  const { account } = useContext(Context)
   const [requestUrl, setRequestUrl] = useState('')
   const [open, setOpen] = useState(false)
   const unsavedX = unsavedChanges.find((change) => change.provider === 'x')
+  let datas = []
+  let xUsername = null
+  if (account) {
+    datas = account.data.map((d: string) => JSON.parse(d))
+    const xData = datas.findLast((d: any) => d.provider == 'x')
+    xUsername = xData ? JSON.parse(xData.proofs.claimData.context).extractedParameters.screen_name : null
+  }
   const getVerificationRequest = async () => {
     try {
       const APP_ID = '0xA98aa0ad8961536d3C017085949c98A1bbc264eE'
@@ -31,24 +40,30 @@ export default function X({
         onSuccess: (proofs) => {
           if (proofs) {
             if (typeof proofs === 'string') {
-              setUnsavedChanges([
+              setUnsavedChanges((prev: any[]) => [
+                ...prev,
                 {
                   provider: 'x',
-                  proofs: [proofs],
+                  updatedAt: new Date().toISOString(),
+                  proofs,
                 },
               ])
             } else if (typeof proofs !== 'string') {
               if (Array.isArray(proofs)) {
-                setUnsavedChanges([
+                setUnsavedChanges((prev: any[]) => [
+                  ...prev,
                   {
                     provider: 'x',
+                    updatedAt: new Date().toISOString(),
                     proofs,
                   },
                 ])
               } else {
-                setUnsavedChanges([
+                setUnsavedChanges((prev: any[]) => [
+                  ...prev,
                   {
                     provider: 'x',
+                    updatedAt: new Date().toISOString(),
                     proofs,
                   },
                 ])
@@ -70,9 +85,15 @@ export default function X({
   return (
     <>
       <div className='flex items-center gap-4'>
-        <Button size='lg' variant='outline' className='w-full' onClick={getVerificationRequest}>
-          <BsTwitterX /> Link X
-        </Button>
+        {unsavedX ? (
+          <div>@{JSON.parse(unsavedX.proofs.claimData.context).extractedParameters.screen_name}</div>
+        ) : xUsername ? (
+          <div>@{xUsername}</div>
+        ) : (
+          <Button size='lg' variant='outline' className='w-full' onClick={getVerificationRequest}>
+            <BsTwitterX /> Link X
+          </Button>
+        )}
         {unsavedX && <SaveOff size={16} color='#dc2626' />}
       </div>
       <Dialog open={open} onOpenChange={setOpen}>
