@@ -48,7 +48,6 @@ The **Prims Mammothon** is a decentralized identity verification platform that a
 - No private keys or sensitive user data are collected.
 
 ## Roadmap
-- [ ] Add **ENS & Lens Protocol** integration
 - [ ] Implement **Decentralized Identity (DID)** verification
 - [ ] Expand **trust score criteria**
 - [ ] Develop **browser extension** for identity validation
