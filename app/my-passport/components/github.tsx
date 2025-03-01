@@ -86,7 +86,7 @@ export default function Github({
     <>
       <div className='flex items-center gap-4'>
         {unsavedGithub ? (
-          <div>@{JSON.parse(unsavedGithub.proofs.claimData.context).extractedParameters.username}</div>
+          <div>{JSON.parse(unsavedGithub.proofs.claimData.context).extractedParameters.username}</div>
         ) : githubUsername ? (
           <div className='flex items-center gap-3'>
             <div>{githubUsername}</div>
