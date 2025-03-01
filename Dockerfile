@@ -1,24 +1,22 @@
+# Base on offical Node.js Alpine image
 FROM node:22-alpine
 RUN apk add --no-cache libc6-compat
-
-WORKDIR /app
+# Set working directory
+WORKDIR /usr/app
 
 COPY package.json yarn.lock ./
-RUN  yarn --frozen-lockfile
+RUN yarn
 
-# FROM node:18-alpine AS builder
-# WORKDIR /app
-# COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# ENV NEXT_TELEMETRY_DISABLED 1
-
-RUN yarn build 
-
-COPY . . 
+# Build app
+RUN yarn build
 
 EXPOSE 3000
 
-ENV PORT 3000
+# Run container as non-root (unprivileged) user
+# The node user is provided in the Node.js Alpine base image
+USER node
 
-CMD ["next", "start"]
+# Run npm start script when container starts
+CMD [ "npm", "start" ]
