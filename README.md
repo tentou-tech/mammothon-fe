@@ -30,7 +30,7 @@ The **Prims Mammothon** is a decentralized identity verification platform that a
 1. Clone the repository:
    ```sh
    git clone git@github.com:tentou-tech/mammothon-fe.git
-   cd prims-mammothon
+   cd mammothon-fe
    ```
 2. Install dependencies:
    ```sh
