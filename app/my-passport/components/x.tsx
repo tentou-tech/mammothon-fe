@@ -107,7 +107,7 @@ export default function X({
             <DialogTitle>Scan this QR to proof your identity?</DialogTitle>
           </DialogHeader>
           <div className='flex flex-col gap-4 items-center'>
-            <QRCode value={requestUrl} className='w-full' />
+            <QRCode value={requestUrl} className='w-full bg-white py-10' />
             <Link href={'/'} className='text-blue-500 text-sm'>
               Need help?
             </Link>
